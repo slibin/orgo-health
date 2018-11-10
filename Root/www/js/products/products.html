@@ -1,0 +1,132 @@
+<ion-view view-title="Products">
+<ion-nav-title>
+	<a ng-if="cat_id>0" class="catheading" ng-click="catsShow();"><span ng-bind-html="selectedCat.title|lowercase"></span> ({{selectedCat.total}})</a>
+	<span ng-if="cat_id<=0" ng-bind-html="catname|lowercase"></span>
+	<!-- {{cat_id}} {{catname}} -->
+</ion-nav-title>
+<ion-nav-bar class="bar-stable">
+	<ion-nav-buttons side="left">
+	<!-- <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeftSideMenu();"></button> -->
+	<button ng-click="gotoDashboard()" class="button back-button button-icon button-clear header-item ion-android-arrow-back"></button>
+	</ion-nav-buttons>
+	<ion-nav-buttons side="right">
+		<button class="button button-icon button-clear ion-android-search" ng-click="searchShow();" ></button>
+	</ion-nav-buttons>
+</ion-nav-bar>
+  <ion-content scroll="false" overflow-scroll="true"  >
+		 <ion-slide-box slide-tabs-scrollable="true"  show-pager="false" ion-slide-tabs>
+			<ion-slide ion-slide-tab-label="All"   >
+			  <ion-content direction="y" class="subContent"  scroll="true"   lazy-scroll>
+
+					<div class="list products" ng-repeat="tmpObj in products" >
+						<div class="item item-thumbnail-left" >
+						  <img image-lazy-src="{{tmpObj.image!=null ? tmpObj.image : 'img/no-image.jpg' }}" ng-click="showProductDetail(tmpObj.id);"  image-lazy-loader="spiral" image-lazy-distance-from-bottom-to-load="-50">
+						  <div ng-click="showProductDetail(tmpObj.id);">
+						  <h2 ng-bind-html="tmpObj.name | lowercase"></h2>
+						  <h3 class="redColor">{{tmpObj.manufacturer | lowercase}}</h3>
+						  <h3 ng-if="tmpObj.weight">Weight : {{tmpObj.weight | number:2}} {{tmpObj.weight_class | lowercase}}</h3>
+						  <h3 ng-if="tmpObj.quantity">Availability : {{tmpObj.quantity>0 ? 'In Stock' :'Out of Stock'}}</h3>
+						  <h3>Product Code : {{tmpObj.model}}</h3>
+						  </div>
+						     <!-- <label ng-if="tmpObj.options.length" class="item item-input item-select">
+								<select ng-repeat="attObj in tmpObj.options" ng-model="pro_attr" ng-change="selectAttrib(tmpObj.id,pro_attr,tmpObj.special)">
+								  <option value='0-0-0'>{{attObj.name}}</option>
+								  <option value="{{vObj.name}}|{{attObj.option_id}}|{{vObj.option_value_id}}|{{vObj.price}}" ng-repeat="vObj in tmpObj.options[0].option_value">{{vObj.name}}</option>
+								</select>
+							  </label> -->
+
+								<div class="row">
+									<div class="col col-40" ng-click="showProductDetail(tmpObj.id);"  >
+										<span class="{{tmpObj.special_formated=='' ? 'sprice' : 'price'}}" ng-bind-html="tmpObj.price_formated"></span>
+										<span class="saleprice" id="sprice_{{tmpObj.id}}" ng-bind-html="tmpObj.special_formated"></span>
+										<!-- <span class="saleprice hidePrice" id="attrprice_{{tmpObj.id}}" ><span class="fa fa-inr">&nbsp;</span><span id="attramt_{{tmpObj.id}}"></span></span>
+										<span id="selectedattr_{{tmpObj.id}}" attval=''></span> -->
+									</div>
+								<div class="col col-60" >
+										<ul ng-if="tmpObj.quantity>0" id="cartbtn_{{tmpObj.id}}" class='tg-list' >
+										<li class='tg-list-item'>
+											<input class='tgl tgl-flip' id='cb{{tmpObj.id}}' checked ng-if="selectId==tmpObj.id"  type='checkbox' >
+											<input class='tgl tgl-flip' id='cb{{tmpObj.id}}' ng-if="selectId!=tmpObj.id"   ng-click="AddToCart(tmpObj)" type='checkbox' >
+											<label class='tgl-btn' data-tg-off='Add' data-tg-on='Done' for='cb{{tmpObj.id}}'></label>
+										</li>
+										</ul>
+										<div ng-show="tmpObj.quantity<=0" id="nostock_{{tmpObj.id}}"  class="outofStock">Out of Stock</div>
+								</div>
+							</div>
+
+						</div>
+
+					 </div>
+						<div class="item item-thumbnail-left" ng-if="noProductsAvailable" style="border:0px;" ></div>
+
+					 	<div class="noProudct" ng-if="noRecords">
+							<i class="ion-ios-cart"></i>
+							<p>Sorry! There are no products to display.</p>
+							<a ng-href="#/app/dashboard" class="button button-balanced">Start Shopping</a>
+					   </div>
+					   <ion-refresher pulling-text="Reload Data"  on-refresh="showProducts(cat_id)"></ion-refresher>
+					   <div ng-if="requestTimeout" class="requestTimeout">Pull Down To Refresh</div>
+
+				  <ion-infinite-scroll ng-if="!noProductsAvailable" on-infinite="loadMoreProducts()" distance="1%"   spinner-class="spinner-energized" spinner="spiral"></ion-infinite-scroll>
+			 </ion-content>
+
+			</ion-slide>
+
+			 <ion-slide ion-slide-tab-label="New Products"   >
+
+				 <ion-content direction="y" class="subContent"  lazy-scroll>
+
+						<div class="list products" ng-repeat="tmpObj in newProducts">
+							<div class="item item-thumbnail-left">
+							   <img ng-src="{{tmpObj.image!=null ? tmpObj.image : 'img/no-image.jpg' }}" ng-click="showProductDetail(tmpObj.id);" >
+							   <div ng-click="showProductDetail(tmpObj.id);">
+							  <h2 ng-bind-html="tmpObj.name | lowercase"></h2>
+							  <h3 class="redColor">{{tmpObj.manufacturer}}</h3>
+							  <h3 ng-if="tmpObj.weight">Weight : {{tmpObj.weight | number:2}} {{tmpObj.weight_class | lowercase}}</h3>
+							  <h3 ng-if="tmpObj.quantity">Availability : {{tmpObj.quantity>0 ? 'In Stock' :'Out of Stock'}}</h3>
+							  <h3>Product Code : {{tmpObj.model}}</h3>
+							  </div>
+							 <!-- <label ng-if="tmpObj.options.length" class="item item-input item-select">
+								<select ng-repeat="attObj in tmpObj.options" ng-model="pro_attr" ng-change="selectAttrib(tmpObj.id,pro_attr,tmpObj.special)">
+								  <option value='0-0-0'>{{attObj.name}}</option>
+								  <option value="{{attObj.option_id}}-{{vObj.option_value_id}}-{{vObj.price}}" ng-repeat="vObj in tmpObj.options[0].option_value">{{vObj.name}}</option>
+								</select>
+							  </label>-->
+
+								<div class="row">
+									<div class="col col-40" ng-click="showProductDetail(tmpObj.id);">
+										<span class="{{tmpObj.special_formated=='' ? 'sprice' : 'price'}}" ng-bind-html="tmpObj.price"></span>
+										<span class="saleprice" ng-show="tmpObj.special_formated!=''" id="sprice_{{tmpObj.id}}" ng-bind-html="tmpObj.special_formated"></span>
+										<!-- <span class="saleprice hidePrice" id="attrprice_{{tmpObj.id}}" ><span class="fa fa-inr">&nbsp;</span><span id="attramt_{{tmpObj.id}}"></span></span> -->
+									</div>
+									<div class="col col-60">
+											<ul class='tg-list'  ng-if="tmpObj.quantity>0" id="cartbtn_{{tmpObj.id}}">
+											<li class='tg-list-item'>
+											 <input class='tgl tgl-flip' id='cb{{tmpObj.id}}' checked ng-if="selectId==tmpObj.id"  type='checkbox' >
+											<input class='tgl tgl-flip' id='cb{{tmpObj.id}}' ng-if="selectId!=tmpObj.id"   ng-click="AddToCart(tmpObj)" type='checkbox' >
+
+											<label class='tgl-btn' data-tg-off='Add' data-tg-on='Done' for='cb{{tmpObj.id}}'></label>
+											</li>
+											</ul>
+											<div ng-show="tmpObj.quantity<=0" id="nostock_{{tmpObj.id}}"  class="outofStock">Out of Stock</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="item item-thumbnail-left" ng-if="noProductsAvailable" style="border:0px;" ></div>
+						 <ion-refresher pulling-text="Reload Data"  on-refresh="showProducts(cat_id)"></ion-refresher>
+					   <div ng-if="requestTimeout" class="requestTimeout">Pull Down To Refresh</div>
+					   <ion-infinite-scroll ng-if="!noProductsAvailable" on-infinite="loadMoreProducts()" distance="1%"   spinner-class="spinner-energized" spinner="spiral"></ion-infinite-scroll>
+				 </ion-content>
+			 </ion-slide>
+
+		</ion-slide-box>
+
+		 <div class="tabs tabs-icon-left">
+		  <a class="tab-item" ng-href="#/app/filter/{{cat_id}}"><i class="icon ion-funnel"></i>Filter</a>
+		  <a class="tab-item" ng-click="sortShow();"><i class="icon ion-android-options"></i>Sort</a>
+		</div>
+
+
+  </ion-content>
+</ion-view>

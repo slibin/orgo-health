@@ -1,0 +1,25 @@
+.scroll-content{
+
+	.ordersList{
+		i.icon{color:#000; font-size:14px; left:7px; right:7px;}
+		i.price{font-weight:bold;}
+		i.icon span{margin-right:4px;}
+		.item-icon-left{padding-left:100px;text-align: center;}
+
+		.list .item.Complete{color:green; i{color:green;}}
+		.list .item.Failed{color:red; i{color:red;}}
+		.list .item.Canceled{color:red; i{color:red;}}
+
+	}
+
+	.orderDetail{
+		.card .item{ padding:10px;}
+		.card .item.item-divider{ background:#eee; height:40px; line-height:25px;}
+		.card .row{ padding:0;margin:0; }
+		.card .row .col{ padding:0;margin:0; }
+		.card .row .col.one{ text-align:left; }
+		.card .row .col.two{ text-align:center; }
+		.card .row .col.thre{ text-align:right; }
+	}
+
+}

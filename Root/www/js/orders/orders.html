@@ -1,0 +1,20 @@
+<ion-view view-title="Orders List">
+<ion-content>
+
+<div class="ordersList">
+	<div class="list card">
+	  <a  ng-click="orderDetailShow(obj.order_id);" class="item item-icon-left item-icon-right {{obj.status}}" ng-repeat="obj in ordersList">
+		<i class="icon">{{obj.date_added}}</i>
+		{{obj.status}}
+		<i class="icon price">{{obj.total}}</i>
+	  </a>
+	</div>
+	 <div class="noRecord" ng-if="noOrders"><p>Sorry! There are no order to display.</p></div>
+</div>
+
+<ion-refresher pulling-text="Reload Data"  on-refresh="showOrders()"></ion-refresher>
+<div ng-if="requestTimeout" class="requestTimeout">Pull Down To Refresh</div>
+
+
+</ion-content>
+</ion-view>

@@ -1,0 +1,34 @@
+<ion-view view-title="Contact Us">
+    <ion-content class="profileBg">
+         <form name="contactFrm" class="formStyle padding" ng-submit="addContact(contactFrm);" novalidate >
+          <div class="list" >
+  
+              <label class="item item-input"  ng-class="{ 'has-errors' : contactFrm.name.$invalid, 'no-errors' : contactFrm.name.$valid}">
+              <input type="text" placeholder="Name" name="name" ng-model="contactData.name" maxlength="20" ng-minlength="3" ng-maxlength="20" required>
+              </label>
+              <div class="error-container" ng-show="contactFrm.name.$error" ng-messages="contactFrm.firstname.$error">
+              <div ng-messages-include="validate.html"></div>
+              </div>
+
+              <label class="item item-input"  ng-class="{ 'has-errors' : contactFrm.email.$invalid, 'no-errors' : contactFrm.email.$valid}">
+                <input type="email" placeholder="Email Address" name="email" ng-model="contactData.email" required >
+                </label>
+                <label class="item item-input"  ng-class="{ 'has-errors' : contactFrm.enquiry.$invalid, 'no-errors' : contactFrm.enquiry.$valid}">
+                    <textarea  placeholder="Enquiry" name="enquiry" ng-model="contactData.enquiry" rows="8" required>
+                        </textarea>
+                    </label>
+              
+  
+            <button class="button button-block icon-left button-balanced" ng-disabled="contactFrm.$invalid">Submit</button>
+           </div>
+          </form>
+  
+          <script id="validate.html" type="text/ng-template">  
+          <div class="error" ng-message="minlength">  Minimum length of this field is 3 characters!</div>
+          <div class="error" ng-message="maxlength">  Maximum length of this field is 20 characters!	</div>
+          </script>
+          
+  
+          
+    </ion-content>
+  </ion-view>

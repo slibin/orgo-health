@@ -1,0 +1,40 @@
+<ion-view view-title="">
+<ion-nav-bar class="bar-stable">
+	<ion-nav-buttons side="left"><button ng-click="cancelProcess()" ng-if="isPayment" class="button back-button button-icon button-clear header-item ion-android-arrow-back"></button></ion-nav-buttons>
+	<ion-nav-title ng-show="!isPayment">Order Status</ion-nav-title>
+	<ion-nav-buttons side="right"></ion-nav-buttons>
+
+</ion-nav-bar>
+  <ion-content scroll="false" overflow-scroll="true" class="shoppingCart" >
+
+    <iframe ng-if="isPayment" src="{{currentProjectUrl}}" width="100%" height="100%"></iframe>
+
+	<div class="emptycart" ng-if="order_fstatus==1">
+			<img ng-src="img/success.png">
+			<p>Your order has been successfully placed. Our executive will contact you soon regarding this order.</p>
+			<a ng-href="#/app/dashboard" class="button button-balanced">Continue Shopping</a>
+	</div>
+
+	<div class="emptycart" ng-if="order_fstatus==2">
+			<img ng-src="img/fail.png">
+			<p>Payment process failed. Please try again.</p>
+			<a ng-click="$ionicGoBack()" class="button button-balanced">Try Again</a><br/><br/>
+			<a ng-href="#/app/dashboard" class="button button-balanced">Continue Shopping</a>
+	</div>
+
+	<div class="emptycart" ng-if="order_fstatus==3">
+			<img ng-src="img/fail.png">
+			<p>The payment process could not complete.</p>
+			<a ng-click="$ionicGoBack()" class="button button-balanced">Try Again</a><br/><br/>
+			<a ng-href="#/app/dashboard" class="button button-balanced">Continue Shopping</a>
+	</div>
+
+    <div class="emptycart" ng-if="order_fstatus==10">
+			<img ng-src="img/fail.png">
+			<p>Pending for payment process.</p>
+			<a ng-click="$ionicGoBack()" class="button button-balanced">Try Again</a><br/><br/>
+			<a ng-href="#/app/dashboard" class="button button-balanced">Continue Shopping</a>
+	</div>
+
+  </ion-content>
+</ion-view>

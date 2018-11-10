@@ -1,0 +1,11 @@
+<ion-modal-view>
+<ion-header-bar class="bar-stable">
+<button ng-click="sortClose()" class="button back-button button-icon button-clear header-item ion-android-arrow-back"></button>
+<h1 class="title ">Sort Products</h1>
+</ion-header-bar>
+<ion-content>
+	<ion-list >
+	   <ion-radio ng-model="sortProductBy" ng-value="'{{sObj.val}}'" ng-click="setProductSort(sObj.val);" ng-repeat="sObj in sortOptions">{{sObj.name}}<label></label></ion-radio>
+	</ion-list>
+</ion-content>
+</ion-modal-view>

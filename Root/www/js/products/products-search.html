@@ -1,0 +1,26 @@
+<ion-modal-view>
+<ion-header-bar class="bar-stable">
+	<div class="row searchBox">
+	  <div class="col col-20">
+			<button ng-click="searchClose()" class="button back-button button-icon button-clear header-item ion-android-arrow-back"></button>
+	  </div>
+	  <div class="col">
+			<form name="searchForm"  ng-submit="searchProduct();" >
+			 <master-box pholder="Search" searchfun="getSearchResult(data)" resetfun="resetSearch(data)" query="query" ></master-box>
+			 <button class="button button-clea button-small" style="display:none;" ></button>
+			 </form>
+	  </div>
+	</div>
+</ion-header-bar>
+
+<ion-content>
+    <div class="list searchList" ng-if="searchCats">
+		  <div class="item item-divider">Popular Category </div>
+		  <a ng-click="searchProduct(catobj.id,catobj.title);"  class="item" ng-repeat="catobj in searchCats" ng-bind-html="catobj.title|lowercase"></a>
+	 </div>
+	 <div class="list searchList" ng-repeat="obj in popularSearch">
+		  <div class="item item-divider">{{obj.heading}}</div>
+		  <a ng-click="searchProduct(catobj.id,catobj.title);" class="item" ng-repeat="catobj in obj.items" ng-bind-html="catobj.title|lowercase"></a>
+	 </div>
+  </ion-content>
+</ion-modal-view>

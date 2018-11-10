@@ -1,0 +1,31 @@
+.menu {
+  
+  .bar-header {text-align:center; //background:$nav_head_bg; 
+  //background-image:$nav_head_bgimg; 
+  background-color: #E67E22;
+  background-size:100%; }
+  .menu-bottom{font-size:13px; color:#fff;}
+  .avatar { height:90px !important; width:90px !important; left:106px !important; top:16px; }
+
+  .has-expanded-header{ background-color:$nav_content_bg;   background-image:$nav_content_bgimg; background-size:100% 100%;}
+  .has-expanded-header  .list .item a{text-decoration:none;color:#000;}
+  .has-expanded-header .list{ padding:0px; margin:0px;}
+  .has-expanded-header .list .item{ border-bottom:$nav_seprator 1px solid; color:$nav_color;  }
+  .has-expanded-header .list .item:first-child{ border-top:$nav_seprator 1px solid; margin-top:1px;}
+
+  .has-expanded-header .list .item i{ font-size:20px; }
+  .has-expanded-header .list .item i span{ font-size:15px; margin-left:7px; }
+  .item-content{ padding: 10px 49px 10px 16px;}
+}
+ 
+.menu-user-info{ 
+  width:100%; font-size:13px; text-align:left; 
+  p{line-height:15px;}
+  p.welcome{ margin-top:10px;}
+  p.uname{ font-size:15px;}
+  .button{min-height: 30px !important;}
+}
+
+ .menu-open .ion-navicon:before {  content: "\f2ca";} /*Menu Arrow*/
+ .menu-open .ion-more:before {  content: "\f30f";} /*Menu Arrow*/
+ .bar{background-image:none; }

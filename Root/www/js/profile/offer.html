@@ -1,0 +1,15 @@
+<ion-view view-title="Offer Zone">
+    <ion-content >
+  
+      <div class="card" ng-repeat="offer in offers">
+        <div class="item item-divider">
+          {{offer.name}} 
+        </div>
+        <div class="item item-text-wrap">
+          Use Promo Code: {{offer.code}}
+        </div>
+      </div>
+
+
+    </ion-content>
+  </ion-view>

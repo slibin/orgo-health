@@ -1,0 +1,76 @@
+<ion-view view-title="User Authentication">
+<ion-nav-bar class="bar-stable">
+	<ion-nav-buttons side="left">
+	<button ng-click="$ionicGoBack()" class="button back-button button-icon button-clear header-item ion-android-arrow-back"></button>
+	</ion-nav-buttons>
+	<ion-nav-buttons side="right"></ion-nav-buttons>
+</ion-nav-bar>
+ <ion-content class="shoppingCart" scroll="false" overflow-scroll="true" >
+
+		 <ion-slide-box slide-tabs-scrollable="false"  show-pager="false" ion-slide-tabs>
+			<ion-slide ion-slide-tab-label="Register">
+			  <ion-content direction="y" class="subContent" scroll="true">
+					<div class="padding formStyle" ng-include="'js/cart/tmpl-signup.html'"></div>
+			  </ion-content>
+			</ion-slide>
+			<ion-slide ion-slide-tab-label="Login" >
+				<ion-content direction="y" class="subContent" scroll="true">
+						<form name="userLoginForm" class="formStyle padding" ng-submit="userLogin(userLoginForm);" novalidate >
+								<div class="list" >
+								<!-- Email -->
+								<label class="item item-input"  ng-class="{ 'has-errors' : userLoginForm.email.$invalid, 'no-errors' : userLoginForm.email.$valid}">
+									<input type="text" placeholder="Email / Phone Number" name="email"  maxlength="50" ng-model="iniLogin.email" required>
+								</label>
+								<div class="error-container" ng-show="userLoginForm.email.$error" ng-messages="userLoginForm.email.$error">
+									<div ng-messages-include="error-list.html"></div>
+								</div>
+
+								<!-- Password -->
+								<label class="item item-input"  ng-class="{ 'has-errors' : userLoginForm.password.$invalid, 'no-errors' : userLoginForm.password.$valid}">
+									<input type="password" placeholder="Password" name="password" ng-minlength="4" ng-maxlength="15" maxlength="20" ng-model="iniLogin.password" >
+								</label>
+								<div class="error-container" ng-show="userLoginForm.password.$error" ng-messages="userLoginForm.password.$error">
+									<div ng-messages-include="password-validate.html"></div>
+								</div>
+
+							  <button class="button button-block icon-left button-balanced" ng-disabled="userLoginForm.$invalid">Login</button>
+							 </div>
+							</form>
+				 </ion-content>
+			</ion-slide>
+			<ion-slide ion-slide-tab-label="Forgot" >
+				<ion-content direction="y" class="subContent" scroll="true">
+						<form name="userResetPwd" class="formStyle padding" ng-submit="userResetPassword(userResetPwd);" novalidate >
+							<div class="list" >
+							<label class="item item-input"  ng-class="{ 'has-errors' : userResetPwd.email.$invalid, 'no-errors' : userResetPwd.email.$valid}">
+								<input type="email" placeholder="Email Address" name="email"  maxlength="50" ng-model="iniReset.email" required>
+							</label>
+							<div class="error-container" ng-show="userResetPwd.email.$error" ng-messages="userResetPwd.email.$error">
+								<div ng-messages-include="error-list.html"></div>
+							</div>
+
+						  <button class="button button-block icon-left button-balanced" ng-disabled="userResetPwd.$invalid">Reset</button>
+						 </div>
+						</form>
+				 </ion-content>
+			</ion-slide>
+		</dion-slide-box>
+
+			<script id="error-list.html" type="text/ng-template">
+			<div class="error" ng-message="minlength">  Minimum length of this field is 3 characters! </div>
+			<div class="error" ng-message="maxlength">  Maximum length of this field is 20 characters!	</div>
+			<div class="error" ng-message="email">  Please enter a valid email address	</div>
+			</script>
+
+			<script id="password-validate.html" type="text/ng-template">
+			<div class="error" ng-message="minlength">  Minimum length of this field is 4 characters! </div>
+			<div class="error" ng-message="maxlength">  Maximum length of this field is 15 characters!	</div>
+			</script>
+			<script id="phone-validate.html" type="text/ng-template">
+			<div class="error" ng-message="minlength">  Minimum length of this field is 10 characters! </div>
+			<div class="error" ng-message="maxlength">  Maximum length of this field is 10 characters!	</div>
+			</script>
+
+
+  </ion-content>
+</ion-view>

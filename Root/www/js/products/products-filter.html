@@ -1,0 +1,48 @@
+<ion-view view-title="Filter">
+<ion-nav-title>Filter</ion-nav-title>
+<ion-nav-bar class="bar-stable">
+	<ion-nav-buttons side="left">
+	<button ng-click="$ionicGoBack()" class="button back-button button-icon button-clear header-item ion-android-arrow-back"></button>
+	</ion-nav-buttons>
+</ion-nav-bar>
+  <ion-content scroll="false" >
+
+
+
+	<ion-slide-box slide-tabs-scrollable="true"  show-pager="false" ion-slide-tabs>
+		<ion-slide ion-slide-tab-label="Brand" ng-if="brandFilter.length!=''">
+			<ion-content direction="y" class="subContent">
+				<ion-list class="brandFilter">
+				   <ion-checkbox ng-model="brand.selected" ng-repeat="brand in brandFilter">{{brand.name | lowercase }} ({{brand.total}})</ion-checkbox>
+				</ion-list>
+				 <ion-refresher pulling-text="Reload Data"  on-refresh="filterOptions()"></ion-refresher>
+				 <div ng-if="requestTimeout" class="requestTimeout">Reload Data</div>
+			</ion-content>
+		</ion-slide>
+
+
+		<ion-slide ion-slide-tab-label="Price">
+			<ion-content direction="y" class="subContent">
+					<ion-list class="brandFilter">
+					  <ion-checkbox ng-model="pricerange.selected" ng-repeat="pricerange in priceFilter track by $index">
+							<div ng-bind-html="pricerange.pricefilter; pricerange.label; "></div>
+						</ion-checkbox>
+					</ion-list>
+			</ion-content>
+		</ion-slide>
+
+		<ion-slide ion-slide-tab-label="Discount" ng-if="discountFilter.length!=''">
+			<ion-content direction="y" class="subContent">
+					<ion-list class="brandFilter">
+					  <ion-checkbox ng-model="discrange.selected" ng-repeat="discrange in discountFilter"><div ng-bind-html="discrange.discountfilter; discrange.label; "></div></ion-checkbox>
+					</ion-list>
+			</ion-content>
+		</ion-slide>
+
+	</ion-slide-box>
+	<div class="bar bar-footer">
+	   <button class="button button-clear pull-right reset" ng-click="resetFilter();">Reset</button>
+	  <button class="button button-clear pull-right apply" ng-click="applyFilter();">Apply</button>
+	</div>
+  </ion-content>
+</ion-view>

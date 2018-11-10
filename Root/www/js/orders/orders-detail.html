@@ -1,0 +1,66 @@
+<ion-modal-view>
+<ion-header-bar class="bar-stable">
+	<button ng-click="orderDetailClose()" class="button back-button button-icon button-clear header-item ion-android-arrow-back"></button>
+	<h1 class="title">Order Detail</h1>
+</ion-header-bar>
+<ion-content ng-show="isOrderDetail">
+
+	<div class="orderDetail" ng-if="oproducts">
+		<div class="card" ng-repeat="obj in oproducts">
+		  <div class="item item-divider">{{obj.name}} </div>
+		  <div class="item item-text-wrap">
+			<div class="row">
+			  <div class="col one" ng-bind-html="obj.price"></div>
+			  <div class="col two">{{obj.quantity}}</div>
+			  <div class="col thre" ng-bind-html="obj.total"></div>
+			</div>
+		  </div>
+		</div>
+
+		<div class="card">
+		  <div class="item item-divider">Order Information </div>
+		  <div class="item item-text-wrap">
+			<div class="row">
+			  <div class="col one">Payment Method</div>
+			  <div class="col thre">{{odetail.payment_method}}</div>
+			</div>
+			 <div class="row" ng-repeat="tobj in odetail.totals">
+			  <div class="col one">{{tobj.title}}</div>
+			  <div class="col thre">{{tobj.text}}</div>
+			</div>
+		  </div>
+		</div>
+
+		<div class="card">
+		  <div class="item item-divider">Billing Address </div>
+		  <div class="item item-text-wrap">
+				<p>{{odetail.payment_firstname}}</p>
+				<p>{{odetail.payment_lastname}}</p>
+				<p>{{odetail.payment_address_1}}</p>
+				<p>{{odetail.payment_address_2}}</p>
+				<p>{{odetail.payment_city}}</p>
+				<p>{{odetail.payment_country}}</p>
+				<p>{{odetail.payment_postcode}}</p>
+		  </div>
+		</div>
+
+		<div class="card">
+		  <div class="item item-divider">Shipping Address </div>
+		  <div class="item item-text-wrap">
+				<p>{{odetail.shipping_firstname}}</p>
+				<p>{{odetail.shipping_lastname}}</p>
+				<p>{{odetail.shipping_address_1}}</p>
+				<p>{{odetail.shipping_address_2}}</p>
+				<p>{{odetail.shipping_city}}</p>
+				<p>{{odetail.shipping_country}}</p>
+				<p>{{odetail.shipping_postcode}}</p>
+		  </div>
+		</div>
+	</div>
+
+
+
+
+
+</ion-content>
+</ion-modal-view>
